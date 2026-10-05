@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Buy Me a Coffee ☕</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background: #f5f1e8;
+        color: #1f3d32;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 25px;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 500px;
+        background: #ffffff;
+        border-radius: 25px;
+        padding: 40px 30px;
+        text-align: center;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    }
+
+    .logo {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: #1f3d32;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+
+    h1 {
+        font-size: 32px;
+        margin-bottom: 10px;
+        color: #1f3d32;
+    }
+
+    .subtitle {
+        color: #6d6d65;
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 30px;
+    }
+
+    .coffee-box {
+        background: #f5f1e8;
+        border-radius: 18px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .coffee-box h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .amounts {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .amount {
+        border: 2px solid #1f3d32;
+        background: white;
+        color: #1f3d32;
+        padding: 13px;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .amount:hover,
+    .amount.selected {
+        background: #1f3d32;
+        color: white;
+    }
+
+    .custom {
+        margin-top: 12px;
+        width: 100%;
+        padding: 13px;
+        border: 2px solid #ddd;
+        border-radius: 12px;
+        font-size: 16px;
+        outline: none;
+    }
+
+    .custom:focus {
+        border-color: #1f3d32;
+    }
+
+    .message {
+        width: 100%;
+        margin-top: 15px;
+        padding: 13px;
+        border: 2px solid #ddd;
+        border-radius: 12px;
+        resize: none;
+        font-family: Arial, sans-serif;
+        font-size: 15px;
+        outline: none;
+    }
+
+    .message:focus {
+        border-color: #1f3d32;
+    }
+
+    .coffee-button {
+        width: 100%;
+        margin-top: 20px;
+        padding: 16px;
+        border: none;
+        border-radius: 14px;
+        background: #1f3d32;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .coffee-button:hover {
+        background: #162d25;
+        transform: translateY(-2px);
+    }
+
+    .small-text {
+        margin-top: 20px;
+        font-size: 13px;
+        color: #888;
+        line-height: 1.5;
+    }
+
+    .footer {
+        margin-top: 25px;
+        font-size: 12px;
+        color: #aaa;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="logo">☕</div>
+
+    <h1>Buy Me a Coffee</h1>
+
+    <p class="subtitle">
+        Помогни на един беден студент да оцелее в университета,
+        едно кафе наведнъж. 😂
+    </p>
+
+    <div class="coffee-box">
+
+        <h2>Колко кафе искаш да ми купиш? ☕</h2>
+
+        <div class="amounts">
+            <button class="amount" onclick="selectAmount(2)">€2</button>
+            <button class="amount" onclick="selectAmount(5)">€5</button>
+            <button class="amount" onclick="selectAmount(10)">€10</button>
+            <button class="amount" onclick="selectAmount(20)">€20</button>
+        </div>
+
+        <input
+            id="customAmount"
+            class="custom"
+            type="number"
+            min="1"
+            placeholder="Или въведи друга сума (€)"
+        >
+
+        <textarea
+            id="message"
+            class="message"
+            rows="3"
+            placeholder="Остави ми съобщение ☕"
+        ></textarea>
+
+        <button class="coffee-button" onclick="buyCoffee()">
+            ☕ Купи ми кафе
+        </button>
+
+    </div>
+
+    <p class="small-text">
+        Всеки принос помага на един студент да преживее
+        още един ден без да фалира. ❤️
+    </p>
+
+    <div class="footer">
+        Made with ☕ &amp; questionable financial decisions
+    </div>
+
+</div>
+
+<script>
+
+let selectedAmount = 0;
+
+function selectAmount(amount) {
+    selectedAmount = amount;
+
+    document.querySelectorAll(".amount").forEach(button => {
+        button.classList.remove("selected");
+    });
+
+    event.target.classList.add("selected");
+
+    document.getElementById("customAmount").value = "";
+}
+
+function buyCoffee() {
+
+    let customAmount =
+        document.getElementById("customAmount").value;
+
+    let amount = customAmount || selectedAmount;
+
+    if (!amount || amount <= 0) {
+        alert("Първо избери колко кафе искаш да ми купиш ☕");
+        return;
+    }
+
+    /*
+       ТУК ПО-КЪСНО ЩЕ ПОСТАВИМ
+       ТВОЯ ЛИНК ЗА ПЛАЩАНЕ.
+    */
+
+    alert(
+        "Избра да ми купиш кафе за €" +
+        amount +
+        " ☕\n\nСледващата стъпка е да свържем плащането!"
+    );
+}
+
+</script>
+
+</body>
+</html>
