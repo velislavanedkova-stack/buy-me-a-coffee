@@ -249,11 +249,21 @@ function buyCoffee() {
        ТВОЯ ЛИНК ЗА ПЛАЩАНЕ.
     */
 
-    alert(
-        "Избра да ми купиш кафе за €" +
-        amount +
-        " ☕\n\nСледващата стъпка е да свържем плащането!"
-    );
+    let message = "";
+
+if (Number(amount) === 2) {
+    message = "Мерси! ☕❤️";
+} else if (Number(amount) === 5) {
+    message = "Ооо, ти ми угаждаш! Благодаря! 🥹☕";
+} else if (Number(amount) === 10) {
+    message = "Ти си легенда! Благодаря ти страшно много! ❤️☕";
+} else if (Number(amount) > 10) {
+    message = "Това вече е сериозно кафе! Огромно благодаря! 🥹❤️";
+} else {
+    message = "Благодаря ти за кафето! ☕❤️";
+}
+
+alert(message);
 }
 
 </script>
